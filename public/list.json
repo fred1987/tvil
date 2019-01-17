@@ -1,0 +1,39 @@
+{
+  "hotels": [
+    {
+      "id": 1,
+      "name": "The one",
+      "price": 1000
+    },
+    {
+      "id": 2,
+      "name": "Nice room",
+      "price": 2200
+    },
+    {
+      "id": 3,
+      "name": "Cool apartments",
+      "price": 3700
+    },
+    {
+      "id": 4,
+      "name": "Funny rabbit",
+      "price": 2596
+    },
+    {
+      "id": 5,
+      "name": "Sweet paradise",
+      "price": 7856
+    },
+    {
+      "id": 6,
+      "name": "Happy family",
+      "price": 4580
+    },
+    {
+      "id": 7,
+      "name": "Tik-tak",
+      "price": 1850
+    }
+  ]
+}
