@@ -10,11 +10,10 @@
         name: 'book_component',
         created() {
             this.$store.commit('checkHotel', this.$route.params.id)
-            this.hotelName = this.$store.state.hotels.find(item => item.id == this.$route.params.id).name
         },
-        data() {
-            return {
-                hotelName: ''
+        computed: {
+            hotelName() {
+                return this.$store.getters.hotelName(this.$route.params.id)
             }
         }
     }

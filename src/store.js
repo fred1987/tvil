@@ -10,29 +10,40 @@ export default new Vuex.Store({
         checked: null,
         loaded: false
     },
+    getters: {
+        hotelName: state => id => {
+            return state.hotels.find(item => item.id === id).name
+        }
+    },
     mutations: {
-        setHotels(state) {
-            state.hotels = JSON.parse(localStorage.getItem('hotels'))
+        setHotels(state, payload) {
+            state.hotels = payload
             state.loaded = true
         },
         checkHotel(state, payload) {
             state.checked = +payload
         },
         setPriceFilter(state, payload) {
-            if (!isNaN(payload)) state.priceFilter = +payload
+            state.priceFilter = (!isNaN(payload)) ? +payload : 0
         }
     },
     actions: {
         saveHotels(store) {
             return new Promise((res, rej) => {
-                fetch('/list.json')
-                    .then(res => res.json())
-                    .then(data => {
-                        localStorage.setItem('hotels', JSON.stringify(data.hotels))
-                        store.commit('setHotels')
-                        res()
-                    })
-                    .catch(err => rej(err))
+                const hotels = localStorage.getItem('hotels')
+                if (hotels) {
+                    store.commit('setHotels', JSON.parse(hotels))
+                    res()
+                } else {
+                    fetch('/list.json')
+                        .then(res => res.json())
+                        .then(data => {
+                            localStorage.setItem('hotels', JSON.stringify(data.hotels))
+                            store.commit('setHotels', data.hotels)
+                            res()
+                        })
+                        .catch(err => rej(err))
+                }
             })
         }
     }
